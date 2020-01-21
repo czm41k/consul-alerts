@@ -1,5 +1,5 @@
 {
-	"ImportPath": "github.com/uchiru/consul-alerts",
+	"ImportPath": "github.com/czm41k/consul-alerts",
 	"GoVersion": "go1.5.1",
 	"GodepVersion": "v80",
 	"Deps": [

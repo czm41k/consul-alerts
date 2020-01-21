@@ -5,11 +5,11 @@ import (
 	"encoding/json"
 	"os/exec"
 
-	log "github.com/uchiru/consul-alerts/Godeps/_workspace/src/github.com/Sirupsen/logrus"
-	"github.com/uchiru/consul-alerts/Godeps/_workspace/src/github.com/imdario/mergo"
-	"github.com/uchiru/consul-alerts/Godeps/_workspace/src/github.com/mitchellh/hashstructure"
+	log "github.com/czm41k/consul-alerts/Godeps/_workspace/src/github.com/Sirupsen/logrus"
+	"github.com/czm41k/consul-alerts/Godeps/_workspace/src/github.com/imdario/mergo"
+	"github.com/czm41k/consul-alerts/Godeps/_workspace/src/github.com/mitchellh/hashstructure"
 
-	"github.com/uchiru/consul-alerts/notifier"
+	"github.com/czm41k/consul-alerts/notifier"
 )
 
 // NotifEngine handles notifications.

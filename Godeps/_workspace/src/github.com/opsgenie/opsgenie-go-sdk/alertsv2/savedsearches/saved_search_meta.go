@@ -1,6 +1,6 @@
 package savedsearches
 
-import "github.com/uchiru/consul-alerts/Godeps/_workspace/src/github.com/opsgenie/opsgenie-go-sdk/alertsv2"
+import "github.com/czm41k/consul-alerts/Godeps/_workspace/src/github.com/opsgenie/opsgenie-go-sdk/alertsv2"
 
 type SavedSearchMeta struct {
 	ID   string `json:"id,omitempty"`

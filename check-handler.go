@@ -6,11 +6,11 @@ import (
 
 	"net/http"
 
-	"github.com/uchiru/consul-alerts/consul"
-	"github.com/uchiru/consul-alerts/notifier"
-	api "github.com/uchiru/consul-alerts/Godeps/_workspace/src/github.com/hasicorp/consul/api"
+	"github.com/czm41k/consul-alerts/consul"
+	"github.com/czm41k/consul-alerts/notifier"
+	api "github.com/czm41k/consul-alerts/Godeps/_workspace/src/github.com/hasicorp/consul/api"
 
-	log "github.com/uchiru/consul-alerts/Godeps/_workspace/src/github.com/Sirupsen/logrus"
+	log "github.com/czm41k/consul-alerts/Godeps/_workspace/src/github.com/Sirupsen/logrus"
 )
 
 type CheckProcessor struct {

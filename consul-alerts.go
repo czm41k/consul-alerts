@@ -13,11 +13,11 @@ import (
 	"encoding/json"
 	"io/ioutil"
 
-	"github.com/uchiru/consul-alerts/consul"
-	"github.com/uchiru/consul-alerts/notifier"
+	"github.com/czm41k/consul-alerts/consul"
+	"github.com/czm41k/consul-alerts/notifier"
 
-	log "github.com/uchiru/consul-alerts/Godeps/_workspace/src/github.com/Sirupsen/logrus"
-	"github.com/uchiru/consul-alerts/Godeps/_workspace/src/github.com/docopt/docopt-go"
+	log "github.com/czm41k/consul-alerts/Godeps/_workspace/src/github.com/Sirupsen/logrus"
+	"github.com/czm41k/consul-alerts/Godeps/_workspace/src/github.com/docopt/docopt-go"
 )
 
 const version = "Consul Alerts 0.5.0"

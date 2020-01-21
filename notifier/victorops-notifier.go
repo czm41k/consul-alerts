@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"net/http"
 
-	log "github.com/uchiru/consul-alerts/Godeps/_workspace/src/github.com/Sirupsen/logrus"
+	log "github.com/czm41k/consul-alerts/Godeps/_workspace/src/github.com/Sirupsen/logrus"
 )
 
 // VictorOpsNotifier provides configuration options for the VictorOps notifier

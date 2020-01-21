@@ -43,10 +43,10 @@ import (
 	"runtime"
 	"time"
 
-	"github.com/uchiru/consul-alerts/Godeps/_workspace/src/github.com/franela/goreq"
-	goquery "github.com/uchiru/consul-alerts/Godeps/_workspace/src/github.com/google/go-querystring/query"
-	"github.com/uchiru/consul-alerts/Godeps/_workspace/src/github.com/opsgenie/opsgenie-go-sdk/alertsv2"
-	"github.com/uchiru/consul-alerts/Godeps/_workspace/src/github.com/opsgenie/opsgenie-go-sdk/logging"
+	"github.com/czm41k/consul-alerts/Godeps/_workspace/src/github.com/franela/goreq"
+	goquery "github.com/czm41k/consul-alerts/Godeps/_workspace/src/github.com/google/go-querystring/query"
+	"github.com/czm41k/consul-alerts/Godeps/_workspace/src/github.com/opsgenie/opsgenie-go-sdk/alertsv2"
+	"github.com/czm41k/consul-alerts/Godeps/_workspace/src/github.com/opsgenie/opsgenie-go-sdk/logging"
 	"path/filepath"
 )
 

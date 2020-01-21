@@ -1,8 +1,8 @@
 package main
 
 import (
-	log "github.com/uchiru/consul-alerts/Godeps/_workspace/src/github.com/Sirupsen/logrus"
-	consulapi "github.com/uchiru/consul-alerts/Godeps/_workspace/src/github.com/hashicorp/consul/api"
+	log "github.com/czm41k/consul-alerts/Godeps/_workspace/src/github.com/Sirupsen/logrus"
+	consulapi "github.com/czm41k/consul-alerts/Godeps/_workspace/src/github.com/hashicorp/consul/api"
 	"time"
 )
 

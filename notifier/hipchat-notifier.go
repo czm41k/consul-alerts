@@ -7,9 +7,9 @@ import (
 	"strings"
 	"unicode/utf8"
 
-	"github.com/uchiru/consul-alerts/Godeps/_workspace/src/github.com/tbruyelle/hipchat-go/hipchat"
+	"github.com/czm41k/consul-alerts/Godeps/_workspace/src/github.com/tbruyelle/hipchat-go/hipchat"
 
-	log "github.com/uchiru/consul-alerts/Godeps/_workspace/src/github.com/Sirupsen/logrus"
+	log "github.com/czm41k/consul-alerts/Godeps/_workspace/src/github.com/Sirupsen/logrus"
 )
 
 type HipChatNotifier struct {

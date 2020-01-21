@@ -4,7 +4,7 @@ ENV GOPATH /go
 RUN mkdir -p /go && \
     apk update && \
     apk add bash ca-certificates git && \
-    GO111MODULE="off" go get -v github.com/uchiru/consul-alerts && \
+    GO111MODULE="off" go get -v github.com/czm41k/consul-alerts && \
     mv /go/bin/consul-alerts /bin && \
     GO111MODULE="off" go get -v github.com/hashicorp/consul && \
     mv /go/bin/consul /bin && \

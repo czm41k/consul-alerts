@@ -7,7 +7,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/uchiru/consul-alerts/Godeps/_workspace/src/github.com/google/go-querystring/query"
+	"github.com/czm41k/consul-alerts/Godeps/_workspace/src/github.com/google/go-querystring/query"
 	"io"
 	"io/ioutil"
 	"mime"

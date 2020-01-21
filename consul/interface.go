@@ -3,7 +3,7 @@ package consul
 import (
 	"time"
 
-	notifier "github.com/uchiru/consul-alerts/notifier"
+	notifier "github.com/czm41k/consul-alerts/notifier"
 )
 
 // Event data from consul
