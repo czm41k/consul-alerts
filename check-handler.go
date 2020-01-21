@@ -8,6 +8,7 @@ import (
 
 	"github.com/uchiru/consul-alerts/consul"
 	"github.com/uchiru/consul-alerts/notifier"
+	api "github.com/uchiru/consul-alerts/Godeps/_workspace/src/github.com/hasicorp/consul/api"
 
 	log "github.com/uchiru/consul-alerts/Godeps/_workspace/src/github.com/Sirupsen/logrus"
 )
@@ -18,6 +19,23 @@ type CheckProcessor struct {
 	firstRun       bool
 	notifEngine    *NotifEngine
 	leaderElection *LeaderElection
+}
+
+func (h *Health) GetTags(service string) ([]string, error) {
+	r := h.c.NewRequest("GET", "/v1/health/service/id/"+service)
+	log.Println("Gonna get serviceInfo for v1/health/service/id/"+service)
+	rtt, resp, err := requireOK(h.c.doRequest(r))
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+
+	var out []string
+	if err := decodeBody(resp, &out); err != nil {
+		return nil, nil, err
+	}
+	log.Printf("Got %s", out)
+	return out, nil
 }
 
 func (c *CheckProcessor) start() {
@@ -67,6 +85,7 @@ func (c *CheckProcessor) reminderRun() {
 			Output:      message.Output,
 			ServiceID:   message.ServiceId,
 			ServiceName: message.Service,
+			ServiceTags: message.ServiceTags,
 		}
 		if consulClient.IsBlacklisted(check) {
 			log.Printf("%s:%s:%s is blacklisted, deleting reminder", check.Node, check.ServiceID, check.CheckID)
@@ -128,6 +147,7 @@ func (c *CheckProcessor) notify(alerts []consul.Check) {
 			Node:         alert.Node,
 			ServiceId:    alert.ServiceID,
 			Service:      alert.ServiceName,
+			ServiceTags:  GetTags(alert.ServiceID),
 			CheckId:      alert.CheckID,
 			Check:        alert.Name,
 			Status:       alert.Status,
@@ -139,6 +159,7 @@ func (c *CheckProcessor) notify(alerts []consul.Check) {
 			VarOverrides: profileInfo.VarOverrides,
 			Timestamp:    time.Now(),
 		}
+		log.Printf("ServiceTags inside message are %", messages[i].ServiceTags)
 		if profileInfo.Interval > 0 {
 			switch alert.Status {
 			case "passing":
