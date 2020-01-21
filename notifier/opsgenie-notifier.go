@@ -2,6 +2,7 @@ package notifier
 
 import (
     "fmt"
+    "strings"
 
     "github.com/uchiru/consul-alerts/Godeps/_workspace/src/github.com/opsgenie/opsgenie-go-sdk/alertsv2"
     ogcli "github.com/uchiru/consul-alerts/Godeps/_workspace/src/github.com/opsgenie/opsgenie-go-sdk/client"
@@ -26,7 +27,6 @@ func (opsgenie *OpsGenieNotifier) Copy() Notifier {
     return &notifier
 }
 
-// var endpointURL = "https://api.eu.opsgenie.com"
 
 //Notify sends messages to the endpoint notifier
 func (opsgenie *OpsGenieNotifier) Notify(messages Messages) bool {
@@ -35,9 +35,8 @@ func (opsgenie *OpsGenieNotifier) Notify(messages Messages) bool {
 
     client := new(ogcli.OpsGenieClient)
     client.SetAPIKey(opsgenie.ApiKey)
-    // client.opsGenieAPIURL = endpointURL
     client.SetOpsGenieAPIUrl(opsgenie.ApiUrl)
-    log.Println(fmt.Sprintf("ApiUrl is: %s (%s)", client.OpsGenieAPIUrl()))
+    log.Info(fmt.Sprintf("ApiUrl is: %s and Key: %s", client.OpsGenieAPIUrl(), client.APIKey()))
     alertCli, cliErr := client.AlertV2()
 
     if cliErr != nil {
@@ -47,7 +46,8 @@ func (opsgenie *OpsGenieNotifier) Notify(messages Messages) bool {
 
     ok := true
     for _, message := range messages {
-        title := fmt.Sprintf("\n%s:%s:%s is %s.", message.Node, message.Service, message.Check, message.Status)
+        // title := fmt.Sprintf("\n%s:%s:%s is %s.", message.Node, message.Service, message.Check, message.Status)
+        title := fmt.Sprintf("\n[%s] %s=>%s=>%s %s", opsgenie.ClusterName, strings.ToUpper(message.Status), message.Node, strings.Replace(message.Service, "-main", "", 3), message.Output)
         alias := opsgenie.createAlias(message)
         content := fmt.Sprintf(header, opsgenie.ClusterName, overallStatus, fail, warn, pass)
         content += fmt.Sprintf("\n%s:%s:%s is %s.", message.Node, message.Service, message.Check, message.Status)
@@ -78,7 +78,7 @@ func (opsgenie OpsGenieNotifier) createAlias(message Message) string {
     return incidentKey
 }
 
-func (opsgenie *OpsGenieNotifier) createAlert(alertCli *ogcli.OpsGenieAlertV2Client, message string, content string, alias string) bool {
+func (opsgenie *OpsGenieNotifier) createAlert(alertCli *ogcli.OpsGenieAlertV2Client, message string, content string, alias string, messageTags Message) bool {
     log.Debug(fmt.Sprintf("OpsGenieAlertClient.CreateAlert alias: %s", alias))
 
     req := alertsv2.CreateAlertRequest{
@@ -87,6 +87,7 @@ func (opsgenie *OpsGenieNotifier) createAlert(alertCli *ogcli.OpsGenieAlertV2Cli
         Alias:       alias,
         Source:      "consul",
         Entity:      opsgenie.ClusterName,
+        Tags:        messageTags.ServiceTags,
     }
     response, alertErr := alertCli.Create(req)
 
